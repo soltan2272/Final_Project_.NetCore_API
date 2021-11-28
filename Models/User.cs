@@ -19,5 +19,10 @@ namespace Models
         public string Email { set; get; }
 
         public string Password { set; get; }
+
+        public int SSN { set; get; }
+
+        public DateTime Date_Of_Birth { set; get; }
+
     }
 }
