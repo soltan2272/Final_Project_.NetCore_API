@@ -13,5 +13,8 @@ namespace Models
         public string Address { get; set; }
         public string Phone { get; set; }
 
+        public IList<SupplierStore> SupllierStores { get; set; }
+
+        public IList<StoreProduct> StoresProducts { get; set; }
     }
 }
