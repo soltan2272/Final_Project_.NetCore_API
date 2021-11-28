@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    class Feedback
+    public class Feedback
     {
         public int FID { get; set; }
         public string Type { get; set; }
