@@ -8,6 +8,7 @@ namespace Models
 {
     public class Supplier
     {
+        public int ID { set; get; }
         public int SSN { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }
