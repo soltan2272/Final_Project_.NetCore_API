@@ -30,6 +30,8 @@ namespace Data
         public System.Data.Entity.DbSet<Contact> Contacts { get; set; }
         public System.Data.Entity.DbSet<AdminUser> AdminUsers { get; set; }
         public System.Data.Entity.DbSet<AdminProduct> AdminProducts { get; set; }
+        public System.Data.Entity.DbSet<AdminSupplier> AdminSuppliers { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -123,6 +125,16 @@ namespace Data
             .HasOne<Store>(s => s.Store)
             .WithMany(As => As.AdminStores)
             .HasForeignKey(a => a.Store_ID);
+            modelBuilder.Entity<AdminSupplier>().HasKey(sa => new { sa.Admin_ID, sa.Supplier_ID });
+            modelBuilder.Entity<AdminSupplier>()
+            .HasOne<Admin>(a => a.Admin)
+            .WithMany(sa => sa.AdminSuppliers)
+            .HasForeignKey(sa => sa.Admin_ID);
+
+            modelBuilder.Entity<AdminSupplier>()
+            .HasOne<Supplier>(s => s.Supplier)
+            .WithMany(sa => sa.AdminSuppliers)
+            .HasForeignKey(sa => sa.Supplier_ID);
 
             modelBuilder.Entity<Product>()
             .HasOne<Supplier>(s => s.supplier)

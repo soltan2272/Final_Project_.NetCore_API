@@ -17,6 +17,8 @@ namespace Models
         public IList<AdminUser> AdminUsers { get; set; }
         public IList<AdminProduct> AdminProducts { get; set; }
         public IList<AdminStore> AdminStores { get; set; }
+        public IList<AdminSupplier> AdminSuppliers { get; set; }
+
 
 
     }
