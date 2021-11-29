@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class Feedback
+    public class Feedback: BaseModel
     {
-        public int ID { get; set; }
         public string Type { get; set; }
         public DateTime Date { get; set; }
         public string Subject { get; set; }

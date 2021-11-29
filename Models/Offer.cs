@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class Offer
+    public class Offer: BaseModel
     {
-        public int ID { get; set; }
         public DateTime Start_Date {get; set;}
         public DateTime End_Date { get; set; }
         public float Discount_Percentage { get; set; }

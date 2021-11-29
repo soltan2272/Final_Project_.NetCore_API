@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class Supplier
+    public class Supplier: BaseModel
     {
-        public int ID { set; get; }
         public int SSN { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }
