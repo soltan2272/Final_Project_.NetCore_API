@@ -1,36 +1,40 @@
 ﻿using Microsoft.EntityFrameworkCore;
-
 using Models;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Data
 {
-   public class Project_Context: Microsoft.EntityFrameworkCore.DbContext
+   public class Project_Context:DbContext
     {
-        public System.Data.Entity.DbSet<User> Users { get; set; }
-        public System.Data.Entity.DbSet<Supplier> Suplliers { get; set; }
-        public System.Data.Entity.DbSet<Store> Stores { get; set; }
-        public System.Data.Entity.DbSet<Offer> Offers { get; set; }
-        public System.Data.Entity.DbSet<Product> Products { get; set; }
-        public System.Data.Entity.DbSet<Category> Categories { get; set; }
-        public System.Data.Entity.DbSet<Order> Orders { get; set; }
-        public System.Data.Entity.DbSet<Courier> Couriers { get; set; }
-        public System.Data.Entity.DbSet<Feedback> Feedbacks { get; set; }
-        public System.Data.Entity.DbSet<Payment> Payments { get; set; }
-        public System.Data.Entity.DbSet<ProductFeedback> ProductFeedbacks { get; set; }
-        public System.Data.Entity.DbSet<StoreProduct> storeProducts { get; set; }
-        public System.Data.Entity.DbSet<ProductOffer> productOffers { get; set; }
-        public System.Data.Entity.DbSet<SupplierStore> SupplierStores { get; set; }
-        public System.Data.Entity.DbSet<Admin> Admins { get; set; }
-        public System.Data.Entity.DbSet<Contact> Contacts { get; set; }
-        public System.Data.Entity.DbSet<AdminUser> AdminUsers { get; set; }
-        public System.Data.Entity.DbSet<AdminProduct> AdminProducts { get; set; }
-        public System.Data.Entity.DbSet<AdminSupplier> AdminSuppliers { get; set; }
+        public Project_Context(DbContextOptions<Project_Context> options)
+            : base(options)
+        {
+        }
+
+        public DbSet<User> Users { get; set; }
+        public DbSet<Supplier> Suplliers { get; set; }
+        public DbSet<Store> Stores { get; set; }
+        public DbSet<Offer> Offers { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Courier> Couriers { get; set; }
+        public DbSet<Feedback> Feedbacks { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+        public DbSet<ProductFeedback> ProductFeedbacks { get; set; }
+        public DbSet<StoreProduct> storeProducts { get; set; }
+        public DbSet<ProductOffer> productOffers { get; set; }
+        public DbSet<SupplierStore> SupplierStores { get; set; }
+        public DbSet<Admin> Admins { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
+        public DbSet<AdminUser> AdminUsers { get; set; }
+        public DbSet<AdminProduct> AdminProducts { get; set; }
+        public DbSet<AdminSupplier> AdminSuppliers { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
