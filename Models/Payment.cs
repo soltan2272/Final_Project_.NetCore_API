@@ -9,17 +9,13 @@ namespace Models
    public class Payment
     {
         public int ID { set; get; }
-
         public int Credit_Number { set; get; }
-
         public double Amount { set; get; }
-
         public int Ccv { set; get; }
-
         public string Payment_Type { set; get; }
-
         public DateTime Expire_Date { set; get; }
-
         public string Card_Name { set; get; }
+        public ICollection<Order> Orders { get; set; }
+
     }
 }
