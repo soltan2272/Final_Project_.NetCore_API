@@ -9,20 +9,17 @@ namespace Models
    public class User
     {
         public int ID { set; get; }
-
         public string Full_Name { set; get; }
-
         public string Adrress { set; get; }
-
         public int Phone { set; get; }
-
         public string Email { set; get; }
-
         public string Password { set; get; }
-
         public int SSN { set; get; }
-
         public DateTime Date_Of_Birth { set; get; }
+        public ICollection<Order> Orders { get; set; }
+        public ICollection<Product> Products { get; set; }
+        public ICollection<Feedback> Feedbacks { get; set; }
+
 
     }
 }
