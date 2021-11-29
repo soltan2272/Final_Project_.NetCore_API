@@ -2,16 +2,42 @@
 using Models;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Data
 {
-   public class Project_Context: Microsoft.EntityFrameworkCore.DbContext
+   public class Project_Context:DbContext
     {
-        public System.Data.Entity.DbSet<User> Users { get; set; }
+
+        public Project_Context(DbContextOptions<Project_Context> options)
+            : base(options)
+        {
+        }
+
+        public DbSet<User> Users { get; set; }
+        public DbSet<Supplier> Suplliers { get; set; }
+        public DbSet<Store> Stores { get; set; }
+        public DbSet<Offer> Offers { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Courier> Couriers { get; set; }
+        public DbSet<Feedback> Feedbacks { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+        public DbSet<ProductFeedback> ProductFeedbacks { get; set; }
+        public DbSet<StoreProduct> storeProducts { get; set; }
+        public DbSet<ProductOffer> productOffers { get; set; }
+        public DbSet<SupplierStore> SupplierStores { get; set; }
+        public DbSet<Admin> Admins { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
+        public DbSet<AdminUser> AdminUsers { get; set; }
+        public DbSet<AdminProduct> AdminProducts { get; set; }
+        public DbSet<AdminSupplier> AdminSuppliers { get; set; }
+
+public System.Data.Entity.DbSet<User> Users { get; set; }
         public System.Data.Entity.DbSet<Supplier> Suplliers { get; set; }
         public System.Data.Entity.DbSet<Store> Stores { get; set; }
         public System.Data.Entity.DbSet<Offer> Offers { get; set; }
@@ -30,12 +56,9 @@ namespace Data
 
         public System.Data.Entity.DbSet<AdminUser> AdminUsers { get; set; }
         public System.Data.Entity.DbSet<AdminProduct> AdminProducts { get; set; }
-<<<<<<< HEAD
->>>>>>> d6e0b85c95a90919ccb9039a53ed974b4576d60d
-=======
+
         public System.Data.Entity.DbSet<AdminSupplier> AdminSuppliers { get; set; }
 
->>>>>>> c7da0d702047c975520ecdf99d5a8d273669a669
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -97,9 +120,7 @@ namespace Data
             .WithMany(pf => pf.productFeedbacks)
             .HasForeignKey(pf => pf.Feedback_ID);
 
-<<<<<<< HEAD
           
-=======
             modelBuilder.Entity<AdminUser>().HasKey(Au => new { Au.User_ID, Au.Admin_ID });
             modelBuilder.Entity<AdminUser>()
             .HasOne<Admin>(a => a.Admin)
@@ -132,9 +153,6 @@ namespace Data
             .HasOne<Store>(s => s.Store)
             .WithMany(As => As.AdminStores)
             .HasForeignKey(a => a.Store_ID);
-<<<<<<< HEAD
->>>>>>> d6e0b85c95a90919ccb9039a53ed974b4576d60d
-=======
             modelBuilder.Entity<AdminSupplier>().HasKey(sa => new { sa.Admin_ID, sa.Supplier_ID });
             modelBuilder.Entity<AdminSupplier>()
             .HasOne<Admin>(a => a.Admin)
@@ -145,7 +163,6 @@ namespace Data
             .HasOne<Supplier>(s => s.Supplier)
             .WithMany(sa => sa.AdminSuppliers)
             .HasForeignKey(sa => sa.Supplier_ID);
->>>>>>> c7da0d702047c975520ecdf99d5a8d273669a669
 
             modelBuilder.Entity<Product>()
             .HasOne<Supplier>(s => s.supplier)
