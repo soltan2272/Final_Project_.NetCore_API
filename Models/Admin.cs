@@ -12,7 +12,14 @@ namespace Models
         public string Name { get; set; }
         public string Email { get; set; }
         public string Password { set; get; }
-        public IList<AdminSupplier> AdminSuppliers { get; set; }
+<<<<<<< HEAD
+=======
+        public int CurrentContactID { get; set; }
+        public Contact Contact { get; set; }
+        public IList<AdminUser> AdminUsers { get; set; }
+        public IList<AdminProduct> AdminProducts { get; set; }
+        public IList<AdminStore> AdminStores { get; set; }
+>>>>>>> d6e0b85c95a90919ccb9039a53ed974b4576d60d
 
 
     }

@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Models;
-using Models.Configration;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -28,7 +27,10 @@ namespace Data
         public System.Data.Entity.DbSet<SupplierStore> SupplierStores { get; set; }
         public System.Data.Entity.DbSet<Admin> Admins { get; set; }
         public System.Data.Entity.DbSet<Contact> Contacts { get; set; }
-        public System.Data.Entity.DbSet<AdminSupplier> AdminSuppliers { get; set; }
+
+        public System.Data.Entity.DbSet<AdminUser> AdminUsers { get; set; }
+        public System.Data.Entity.DbSet<AdminProduct> AdminProducts { get; set; }
+>>>>>>> d6e0b85c95a90919ccb9039a53ed974b4576d60d
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -90,16 +92,42 @@ namespace Data
             .WithMany(pf => pf.productFeedbacks)
             .HasForeignKey(pf => pf.Feedback_ID);
 
-            modelBuilder.Entity<AdminSupplier>().HasKey(sa => new { sa.Admin_ID, sa.Supplier_ID });
-            modelBuilder.Entity<AdminSupplier>()
+<<<<<<< HEAD
+          
+=======
+            modelBuilder.Entity<AdminUser>().HasKey(Au => new { Au.User_ID, Au.Admin_ID });
+            modelBuilder.Entity<AdminUser>()
             .HasOne<Admin>(a => a.Admin)
-            .WithMany(sa => sa.AdminSuppliers)
-            .HasForeignKey(sa => sa.Admin_ID);
+            .WithMany(Au => Au.AdminUsers)
+            .HasForeignKey(a => a.Admin_ID);
 
-            modelBuilder.Entity<AdminSupplier>()
-            .HasOne<Supplier>(s => s.Supplier)
-            .WithMany(sa => sa.AdminSuppliers)
-            .HasForeignKey(sa => sa.Supplier_ID);
+            modelBuilder.Entity<AdminUser>()
+            .HasOne<User>(u => u.User)
+            .WithMany(Au => Au.AdminUsers)
+            .HasForeignKey(u => u.User_ID);
+
+            modelBuilder.Entity<AdminProduct>().HasKey(Ap => new { Ap.Product_ID, Ap.Admin_ID });
+            modelBuilder.Entity<AdminProduct>()
+            .HasOne<Admin>(a => a.Admin)
+            .WithMany(Ap => Ap.AdminProducts)
+            .HasForeignKey(a => a.Admin_ID);
+
+            modelBuilder.Entity<AdminProduct>()
+            .HasOne<Product>(p => p.Product)
+            .WithMany(Ap => Ap.AdminProducts)
+            .HasForeignKey(p => p.Product_ID);
+
+            modelBuilder.Entity<AdminStore>().HasKey(As => new { As.Store_ID, As.Admin_ID });
+            modelBuilder.Entity<AdminStore>()
+            .HasOne<Admin>(a => a.Admin)
+            .WithMany(As => As.AdminStores)
+            .HasForeignKey(a => a.Admin_ID);
+
+            modelBuilder.Entity<AdminStore>()
+            .HasOne<Store>(s => s.Store)
+            .WithMany(As => As.AdminStores)
+            .HasForeignKey(a => a.Store_ID);
+>>>>>>> d6e0b85c95a90919ccb9039a53ed974b4576d60d
 
             modelBuilder.Entity<Product>()
             .HasOne<Supplier>(s => s.supplier)
@@ -130,6 +158,11 @@ namespace Data
             .HasOne<User>(u => u.User)
             .WithMany(f => f.Feedbacks)
             .HasForeignKey(u => u.CurrentUserID);
+
+            modelBuilder.Entity<Admin>()
+            .HasOne<Contact>(c=>c.Contact)
+            .WithMany(a => a.Admins)
+            .HasForeignKey(a => a.CurrentContactID);
 
             base.OnModelCreating(modelBuilder);
         }

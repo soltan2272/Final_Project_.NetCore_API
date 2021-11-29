@@ -19,6 +19,8 @@ namespace Models
         public ICollection<Order> Orders { get; set; }
         public ICollection<Product> Products { get; set; }
         public ICollection<Feedback> Feedbacks { get; set; }
+        public IList<AdminUser> AdminUsers { get; set; }
+
 
 
     }
