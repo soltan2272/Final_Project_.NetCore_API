@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Models.Configration
+namespace Models
 {
    public class CategoryEntityConfiguration : IEntityTypeConfiguration<Category>
     {

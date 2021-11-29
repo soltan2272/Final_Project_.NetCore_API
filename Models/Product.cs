@@ -23,6 +23,8 @@ namespace Models
         public Category category { get; set; }
         public int CurrentUserID { get; set; }
         public User User { get; set; }
+        public IList<AdminProduct> AdminProducts { get; set; }
+
 
     }
 }
