@@ -18,6 +18,7 @@ namespace Models
         public int Credit_Card { get; set; }
 
         public IList<SupplierStore> SupllierStores { get; set; }
+        public IList<AdminSupplier> AdminSuppliers { get; set; }
 
         public ICollection<Product> Products { get; set; }
 

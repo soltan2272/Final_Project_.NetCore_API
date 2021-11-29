@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-
 using Models;
 using Models.Configration;
 using System;
@@ -29,6 +28,7 @@ namespace Data
         public System.Data.Entity.DbSet<SupplierStore> SupplierStores { get; set; }
         public System.Data.Entity.DbSet<Admin> Admins { get; set; }
         public System.Data.Entity.DbSet<Contact> Contacts { get; set; }
+        public System.Data.Entity.DbSet<AdminSupplier> AdminSuppliers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -89,6 +89,17 @@ namespace Data
             .HasOne<Feedback>(f => f.Feedback)
             .WithMany(pf => pf.productFeedbacks)
             .HasForeignKey(pf => pf.Feedback_ID);
+
+            modelBuilder.Entity<AdminSupplier>().HasKey(sa => new { sa.Admin_ID, sa.Supplier_ID });
+            modelBuilder.Entity<AdminSupplier>()
+            .HasOne<Admin>(a => a.Admin)
+            .WithMany(sa => sa.AdminSuppliers)
+            .HasForeignKey(sa => sa.Admin_ID);
+
+            modelBuilder.Entity<AdminSupplier>()
+            .HasOne<Supplier>(s => s.Supplier)
+            .WithMany(sa => sa.AdminSuppliers)
+            .HasForeignKey(sa => sa.Supplier_ID);
 
             modelBuilder.Entity<Product>()
             .HasOne<Supplier>(s => s.supplier)
