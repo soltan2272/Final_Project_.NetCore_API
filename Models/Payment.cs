@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-   public class Payment
+   public class Payment: BaseModel
     {
-        public int ID { set; get; }
         public int Credit_Number { set; get; }
         public double Amount { set; get; }
         public int Ccv { set; get; }

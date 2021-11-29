@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class Courier
+    public class Courier: BaseModel
     {
-        public int ID { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public DateTime Date { get; set; }

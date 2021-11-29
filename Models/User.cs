@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-   public class User
+   public class User: BaseModel
     {
-        public int ID { set; get; }
         public string Full_Name { set; get; }
         public string Adrress { set; get; }
         public int Phone { set; get; }
