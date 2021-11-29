@@ -20,6 +20,8 @@ namespace Models
         public IList<SupplierStore> SupllierStores { get; set; }
 
         public ICollection<Product> Products { get; set; }
+        public IList<AdminSupplier> AdminSuppliers { get; set; }
+
 
     }
 }

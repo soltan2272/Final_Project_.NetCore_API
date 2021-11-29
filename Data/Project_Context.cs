@@ -30,7 +30,12 @@ namespace Data
 
         public System.Data.Entity.DbSet<AdminUser> AdminUsers { get; set; }
         public System.Data.Entity.DbSet<AdminProduct> AdminProducts { get; set; }
+<<<<<<< HEAD
 >>>>>>> d6e0b85c95a90919ccb9039a53ed974b4576d60d
+=======
+        public System.Data.Entity.DbSet<AdminSupplier> AdminSuppliers { get; set; }
+
+>>>>>>> c7da0d702047c975520ecdf99d5a8d273669a669
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -127,7 +132,20 @@ namespace Data
             .HasOne<Store>(s => s.Store)
             .WithMany(As => As.AdminStores)
             .HasForeignKey(a => a.Store_ID);
+<<<<<<< HEAD
 >>>>>>> d6e0b85c95a90919ccb9039a53ed974b4576d60d
+=======
+            modelBuilder.Entity<AdminSupplier>().HasKey(sa => new { sa.Admin_ID, sa.Supplier_ID });
+            modelBuilder.Entity<AdminSupplier>()
+            .HasOne<Admin>(a => a.Admin)
+            .WithMany(sa => sa.AdminSuppliers)
+            .HasForeignKey(sa => sa.Admin_ID);
+
+            modelBuilder.Entity<AdminSupplier>()
+            .HasOne<Supplier>(s => s.Supplier)
+            .WithMany(sa => sa.AdminSuppliers)
+            .HasForeignKey(sa => sa.Supplier_ID);
+>>>>>>> c7da0d702047c975520ecdf99d5a8d273669a669
 
             modelBuilder.Entity<Product>()
             .HasOne<Supplier>(s => s.supplier)
