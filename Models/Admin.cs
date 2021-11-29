@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    class Admin
+    public class Admin
     {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string Password { set; get; }
+
     }
 }
