@@ -27,6 +27,8 @@ namespace Data
         public System.Data.Entity.DbSet<StoreProduct> storeProducts { get; set; }
         public System.Data.Entity.DbSet<ProductOffer> productOffers { get; set; }
         public System.Data.Entity.DbSet<SupplierStore> SupplierStores { get; set; }
+        public System.Data.Entity.DbSet<Admin> Admins { get; set; }
+        public System.Data.Entity.DbSet<Contact> Contacts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -40,6 +42,8 @@ namespace Data
             modelBuilder.ApplyConfiguration(new CourierEntityConfiguration());
             modelBuilder.ApplyConfiguration(new PaymentEnityConfiguration());
             modelBuilder.ApplyConfiguration(new FeedbackEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new AdminEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new ContactEntityConfiguration());
 
             modelBuilder.Entity<SupplierStore>().HasKey(ss => new { ss.Store_ID, ss.Supllier_ID });
             modelBuilder.Entity<SupplierStore>()
