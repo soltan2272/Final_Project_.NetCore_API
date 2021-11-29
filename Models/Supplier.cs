@@ -8,6 +8,7 @@ namespace Models
 {
     public class Supplier
     {
+        public int ID { set; get; }
         public int SSN { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }
@@ -15,5 +16,10 @@ namespace Models
         public string Email { get; set; }
         public string Password { get; set; }
         public int Credit_Card { get; set; }
+
+        public IList<SupplierStore> SupllierStores { get; set; }
+
+        public ICollection<Product> Products { get; set; }
+
     }
 }

@@ -6,15 +6,13 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-   public class Store
+    public class Courier
     {
         public int ID { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
-        public string Phone { get; set; }
+        public DateTime Date { get; set; }
+        public ICollection<Order> Orders { get; set; }
 
-        public IList<SupplierStore> SupllierStores { get; set; }
-
-        public IList<StoreProduct> StoresProducts { get; set; }
     }
 }
