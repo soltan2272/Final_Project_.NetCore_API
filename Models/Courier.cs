@@ -12,5 +12,7 @@ namespace Models
         public string Name { get; set; }
         public string Address { get; set; }
         public DateTime Date { get; set; }
+        public ICollection<Order> Orders { get; set; }
+
     }
 }
