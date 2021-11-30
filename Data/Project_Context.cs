@@ -144,6 +144,11 @@ namespace Data
             .HasForeignKey(sa => sa.Supplier_ID);
 
             modelBuilder.Entity<Product>()
+           .HasOne<User>(s => s.User)
+           .WithMany(g => g.Products)
+           .HasForeignKey(s => s.CurrentUserID);
+
+            modelBuilder.Entity<Product>()
             .HasOne<Supplier>(s => s.supplier)
             .WithMany(g => g.Products)
             .HasForeignKey(s => s.CurrentSupplierID);

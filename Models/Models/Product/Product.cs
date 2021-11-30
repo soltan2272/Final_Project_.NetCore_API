@@ -20,7 +20,7 @@ namespace Models
         public IList<ProductFeedback> productFeedbacks { get; set; }
         public int CurrentCategoryID { get; set; }
         public Category category { get; set; }
-        public int CurrentUserID { get; set; }
+        public int? CurrentUserID { get; set; }
         public User User { get; set; }
         public IList<AdminProduct> AdminProducts { get; set; }
 

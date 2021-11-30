@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Data.Migrations
 {
-    public partial class init : Migration
+    public partial class init1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -255,8 +255,7 @@ namespace Data.Migrations
                     Rate = table.Column<int>(type: "int", maxLength: 5, nullable: false),
                     CurrentSupplierID = table.Column<int>(type: "int", nullable: false),
                     CurrentCategoryID = table.Column<int>(type: "int", nullable: false),
-                    CurrentUserID = table.Column<int>(type: "int", nullable: false),
-                    UserID = table.Column<int>(type: "int", nullable: true)
+                    CurrentUserID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -274,8 +273,8 @@ namespace Data.Migrations
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Product_User_UserID",
-                        column: x => x.UserID,
+                        name: "FK_Product_User_CurrentUserID",
+                        column: x => x.CurrentUserID,
                         principalTable: "User",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
@@ -505,9 +504,9 @@ namespace Data.Migrations
                 column: "CurrentSupplierID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Product_UserID",
+                name: "IX_Product_CurrentUserID",
                 table: "Product",
-                column: "UserID");
+                column: "CurrentUserID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductFeedbacks_Product_ID",

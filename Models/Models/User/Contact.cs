@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class Contact: BaseModel
 
+    public class Contact: BaseModel
     {
         public string Address { get; set; }
         public string Email { get; set; }
