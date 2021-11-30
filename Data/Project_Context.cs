@@ -37,27 +37,6 @@ namespace Data
         public DbSet<AdminProduct> AdminProducts { get; set; }
         public DbSet<AdminSupplier> AdminSuppliers { get; set; }
 
-public System.Data.Entity.DbSet<User> Users { get; set; }
-        public System.Data.Entity.DbSet<Supplier> Suplliers { get; set; }
-        public System.Data.Entity.DbSet<Store> Stores { get; set; }
-        public System.Data.Entity.DbSet<Offer> Offers { get; set; }
-        public System.Data.Entity.DbSet<Product> Products { get; set; }
-        public System.Data.Entity.DbSet<Category> Categories { get; set; }
-        public System.Data.Entity.DbSet<Order> Orders { get; set; }
-        public System.Data.Entity.DbSet<Courier> Couriers { get; set; }
-        public System.Data.Entity.DbSet<Feedback> Feedbacks { get; set; }
-        public System.Data.Entity.DbSet<Payment> Payments { get; set; }
-        public System.Data.Entity.DbSet<ProductFeedback> ProductFeedbacks { get; set; }
-        public System.Data.Entity.DbSet<StoreProduct> storeProducts { get; set; }
-        public System.Data.Entity.DbSet<ProductOffer> productOffers { get; set; }
-        public System.Data.Entity.DbSet<SupplierStore> SupplierStores { get; set; }
-        public System.Data.Entity.DbSet<Admin> Admins { get; set; }
-        public System.Data.Entity.DbSet<Contact> Contacts { get; set; }
-
-        public System.Data.Entity.DbSet<AdminUser> AdminUsers { get; set; }
-        public System.Data.Entity.DbSet<AdminProduct> AdminProducts { get; set; }
-
-        public System.Data.Entity.DbSet<AdminSupplier> AdminSuppliers { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
