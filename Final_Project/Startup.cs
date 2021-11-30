@@ -27,6 +27,7 @@ namespace Final_Project
             }
 
             app.UseRouting();
+            app.UseStaticFiles();
 
             app.UseEndpoints(endpoints =>
             {
