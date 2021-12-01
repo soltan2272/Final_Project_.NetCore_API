@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Models
+namespace ViewModels
 {
-   public class BaseModel
+   public class Response
     {
-        public int ID { get; set; }
+        public string Status { get; set; }
+        public string Message { get; set; }
     }
 }

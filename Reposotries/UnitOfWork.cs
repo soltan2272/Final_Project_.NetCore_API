@@ -22,14 +22,15 @@ namespace Reposotries
         GenericRepostory<Product> ProductRepo;
         GenericRepostory<Store> StoreRepo;
         GenericRepostory<Supplier> SupplierRepo;
-        GenericRepostory<User> UserRepo;
+    
         public UnitOfWork(  Project_Context context , GenericRepostory<Admin> adminRepo,
                             GenericRepostory<Category> categoryRepo , GenericRepostory<Contact> contactRepo,
                             GenericRepostory<Courier> courierRepo , GenericRepostory<Feedback> feedbackRepo,
                             GenericRepostory<Offer> offerRepo , GenericRepostory<Order> orderRepo,
                             GenericRepostory<Payment> paymentRepo , GenericRepostory<Product> productRepo,
-                            GenericRepostory<Store> storeRepo , GenericRepostory<Supplier> supplierRepo,
-                            GenericRepostory<User> userRepo){
+                            GenericRepostory<Store> storeRepo , GenericRepostory<Supplier> supplierRepo
+                           
+                            ){
 
 
             Context = context;
@@ -44,7 +45,7 @@ namespace Reposotries
             ProductRepo = productRepo;
             StoreRepo = storeRepo;
             SupplierRepo = supplierRepo;
-            UserRepo = userRepo;
+           
         }
 
         public GenericRepostory<Admin> GetAdminRepo()
@@ -102,11 +103,7 @@ namespace Reposotries
             return SupplierRepo;
 
         }
-        public GenericRepostory<User> GetUserRepo()
-        {
-            return UserRepo;
-
-        }
+      
 
         public async void Save()
         {

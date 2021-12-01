@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-   public class BaseModel
+   public class UserRoles
     {
-        public int ID { get; set; }
+        public const string User = "User";
+        public const string Seller = "Seller";
+       
     }
 }

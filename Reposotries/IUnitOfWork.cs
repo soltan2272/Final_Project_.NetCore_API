@@ -20,7 +20,7 @@ namespace Reposotries
         GenericRepostory<Product> GetProductRepo();
         GenericRepostory<Store> GetStoreRepo();
         GenericRepostory<Supplier> GetSupplierRepo();
-        GenericRepostory<User> GetUserRepo();
+    
         void Save();
        
     }
