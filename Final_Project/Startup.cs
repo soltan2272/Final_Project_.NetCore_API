@@ -10,6 +10,7 @@ using Reposotries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Final_Project
@@ -26,6 +27,8 @@ namespace Final_Project
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+         
+
             services.AddDbContext<Project_Context>(options => {
                 options.UseSqlServer(Configuration.GetConnectionString("KaraKeep"));
             });

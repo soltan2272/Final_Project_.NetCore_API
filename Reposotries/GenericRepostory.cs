@@ -19,33 +19,31 @@ namespace Reposotries
             Table = Context.Set<T>();
         }
 
-        public async Task<IEnumerable<T>> GetAsync()
+        public   IEnumerable<T> Get()
         {
-            return Table;
+           return  Table;
         }
 
-        public async Task<T> GetByIDAsync(int id)
+        public T GetByID(int id)
         {
-            return await Table.FindAsync(id);
+            return  Table.Find(id);
         }
 
-        public async Task<T> Add(T entity)
+        public void Add(T entity)
         {
-            await Table.AddAsync(entity);
-            return entity;
+             Table.Add(entity);
         }
 
-        public async Task<T> Update(T entity)
+        public void Update(T entity)
         {
             Table.Update(entity);
-            return entity;
         }
 
-        public async Task<T> Remove(T entity)
+        public void Remove(T entity)
         {
             Table.Remove(entity);
-            return entity;
         }
 
+       
     }
 }
