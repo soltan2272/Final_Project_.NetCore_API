@@ -24,6 +24,6 @@ namespace Models
         public User User { get; set; }
         public IList<AdminProduct> AdminProducts { get; set; }
 
-
+      
     }
 }

@@ -4,6 +4,7 @@ using Reposotries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Final_Project.Controllers
@@ -14,7 +15,10 @@ namespace Final_Project.Controllers
     {
         IGenericRepostory<Product> ProductRepo;
         IUnitOfWork UnitOfWork;
-       public ProductController(IUnitOfWork unitOfWork)
+
+        ResultViewModel result = new ResultViewModel();
+
+        public ProductController(IUnitOfWork unitOfWork)
         {
             UnitOfWork = unitOfWork;
             ProductRepo = UnitOfWork.GetProductRepo();
@@ -22,15 +26,41 @@ namespace Final_Project.Controllers
         }
 
         [HttpGet("")]
-         public async Task<IEnumerable<Product>> Get()
+
+        public  ResultViewModel Get()
         {
-            return await ProductRepo.GetAsync();
+
+            result.Message = "All Products";
+            result.Data = ProductRepo.Get().Select(p=> new ProductViewModel() {
+                ID=p.ID,
+                Name=p.Name,
+                Image=p.Image,
+                Rate=p.Rate,
+                Description=p.Description,
+                Price=p.Price
+            });
+            return result;
         }
 
         [HttpGet("{id}")]
-        public async Task<Product> GetProductByID(int id)
+        public ResultViewModel GetProductByID(int id)
         {
-            return await ProductRepo.GetByIDAsync(id);
+            result.Message = " Product By ID";
+
+            Product p = ProductRepo.GetByID(id);
+            ProductViewModel productview = new ProductViewModel()
+            {
+                ID = p.ID,
+                Name = p.Name,
+                Image = p.Image,
+                Rate = p.Rate,
+                Description = p.Description,
+                Price = p.Price
+            };
+            result.Data = productview;
+            
+            return result;
+
         }
     }
 }
