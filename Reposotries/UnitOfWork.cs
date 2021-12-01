@@ -8,28 +8,29 @@ using System.Threading.Tasks;
 
 namespace Reposotries
 {
-    public class UnitOfWork: IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         Project_Context Context;
-        GenericRepostory<Admin> AdminRepo;
-        GenericRepostory<Category> CategoryRepo;
-        GenericRepostory<Contact> ContactRepo;
-        GenericRepostory<Courier> CourierRepo;
-        GenericRepostory<Feedback> FeedbackRepo;
-        GenericRepostory<Offer> OfferRepo;
-        GenericRepostory<Order> OrderRepo;
-        GenericRepostory<Payment> PaymentRepo;
-        GenericRepostory<Product> ProductRepo;
-        GenericRepostory<Store> StoreRepo;
-        GenericRepostory<Supplier> SupplierRepo;
-        GenericRepostory<User> UserRepo;
-        public UnitOfWork(  Project_Context context , GenericRepostory<Admin> adminRepo,
-                            GenericRepostory<Category> categoryRepo , GenericRepostory<Contact> contactRepo,
-                            GenericRepostory<Courier> courierRepo , GenericRepostory<Feedback> feedbackRepo,
-                            GenericRepostory<Offer> offerRepo , GenericRepostory<Order> orderRepo,
-                            GenericRepostory<Payment> paymentRepo , GenericRepostory<Product> productRepo,
-                            GenericRepostory<Store> storeRepo , GenericRepostory<Supplier> supplierRepo,
-                            GenericRepostory<User> userRepo){
+        IGenericRepostory<Admin> AdminRepo;
+        IGenericRepostory<Category> CategoryRepo;
+        IGenericRepostory<Contact> ContactRepo;
+        IGenericRepostory<Courier> CourierRepo;
+        IGenericRepostory<Feedback> FeedbackRepo;
+        IGenericRepostory<Offer> OfferRepo;
+        IGenericRepostory<Order> OrderRepo;
+        IGenericRepostory<Payment> PaymentRepo;
+        IGenericRepostory<Product> ProductRepo;
+        IGenericRepostory<Store> StoreRepo;
+        IGenericRepostory<Supplier> SupplierRepo;
+        IGenericRepostory<User> UserRepo;
+        public UnitOfWork(Project_Context context, IGenericRepostory<Admin> adminRepo,
+                            IGenericRepostory<Category> categoryRepo, IGenericRepostory<Contact> contactRepo,
+                            IGenericRepostory<Courier> courierRepo, IGenericRepostory<Feedback> feedbackRepo,
+                            IGenericRepostory<Offer> offerRepo, IGenericRepostory<Order> orderRepo,
+                            IGenericRepostory<Payment> paymentRepo, IGenericRepostory<Product> productRepo,
+                            IGenericRepostory<Store> storeRepo, IGenericRepostory<Supplier> supplierRepo,
+                            IGenericRepostory<User> userRepo)
+        {
 
 
             Context = context;
@@ -47,68 +48,68 @@ namespace Reposotries
             UserRepo = userRepo;
         }
 
-        public GenericRepostory<Admin> GetAdminRepo()
+        public IGenericRepostory<Admin> GetAdminRepo()
         {
             return AdminRepo;
 
         }
-        public GenericRepostory<Category> GetCategoryRepo()
+        public IGenericRepostory<Category> GetCategoryRepo()
         {
             return CategoryRepo;
 
         }
-        public GenericRepostory<Contact> GetContactRepo()
+        public IGenericRepostory<Contact> GetContactRepo()
         {
             return ContactRepo;
 
         }
-        public GenericRepostory<Courier> GetCourierRepo()
+        public IGenericRepostory<Courier> GetCourierRepo()
         {
             return CourierRepo;
 
         }
-        public GenericRepostory<Feedback> GetFeedbackRepo()
+        public IGenericRepostory<Feedback> GetFeedbackRepo()
         {
             return FeedbackRepo;
 
         }
-        public GenericRepostory<Offer> GetOfferRepo()
+        public IGenericRepostory<Offer> GetOfferRepo()
         {
             return OfferRepo;
 
         }
-        public GenericRepostory<Order> GetOrderRepo()
+        public IGenericRepostory<Order> GetOrderRepo()
         {
             return OrderRepo;
 
         }
-        public GenericRepostory<Payment> GetPaymentRepo()
+        public IGenericRepostory<Payment> GetPaymentRepo()
         {
             return PaymentRepo;
 
         }
-        public GenericRepostory<Product> GetProductRepo()
+        public IGenericRepostory<Product> GetProductRepo()
         {
             return ProductRepo;
 
         }
-        public GenericRepostory<Store> GetStoreRepo()
+        public IGenericRepostory<Store> GetStoreRepo()
         {
             return StoreRepo;
 
         }
-        public GenericRepostory<Supplier> GetSupplierRepo()
+        public IGenericRepostory<Supplier> GetSupplierRepo()
         {
             return SupplierRepo;
 
         }
-        public GenericRepostory<User> GetUserRepo()
+        public IGenericRepostory<User> GetUserRepo()
         {
             return UserRepo;
 
         }
 
-        public async void Save()
+        public async Task Save()
         {
             await Context.SaveChangesAsync();
         }

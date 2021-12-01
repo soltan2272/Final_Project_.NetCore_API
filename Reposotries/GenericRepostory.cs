@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Reposotries
 {
-   public class GenericRepostory<T>: IGenericRepostory<T> where T: BaseModel
+    public class GenericRepostory<T> : IGenericRepostory<T> where T : BaseModel
     {
         Project_Context Context;
         DbSet<T> Table;
@@ -46,6 +46,6 @@ namespace Reposotries
             Table.Remove(entity);
             return entity;
         }
-       
+
     }
 }

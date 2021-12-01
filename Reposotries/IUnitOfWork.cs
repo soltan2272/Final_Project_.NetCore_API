@@ -7,21 +7,21 @@ using System.Threading.Tasks;
 
 namespace Reposotries
 {
-   public interface IUnitOfWork
+    public interface IUnitOfWork
     {
-        GenericRepostory<Admin> GetAdminRepo();
-        GenericRepostory<Category> GetCategoryRepo();
-        GenericRepostory<Contact> GetContactRepo();
-        GenericRepostory<Courier> GetCourierRepo();
-        GenericRepostory<Feedback> GetFeedbackRepo();
-        GenericRepostory<Offer> GetOfferRepo();
-        GenericRepostory<Order> GetOrderRepo();
-        GenericRepostory<Payment> GetPaymentRepo();
-        GenericRepostory<Product> GetProductRepo();
-        GenericRepostory<Store> GetStoreRepo();
-        GenericRepostory<Supplier> GetSupplierRepo();
-        GenericRepostory<User> GetUserRepo();
-        void Save();
-       
+        IGenericRepostory<Admin> GetAdminRepo();
+        IGenericRepostory<Category> GetCategoryRepo();
+        IGenericRepostory<Contact> GetContactRepo();
+        IGenericRepostory<Courier> GetCourierRepo();
+        IGenericRepostory<Feedback> GetFeedbackRepo();
+        IGenericRepostory<Offer> GetOfferRepo();
+        IGenericRepostory<Order> GetOrderRepo();
+        IGenericRepostory<Payment> GetPaymentRepo();
+        IGenericRepostory<Product> GetProductRepo();
+        IGenericRepostory<Store> GetStoreRepo();
+        IGenericRepostory<Supplier> GetSupplierRepo();
+        IGenericRepostory<User> GetUserRepo();
+        Task Save();
+
     }
 }

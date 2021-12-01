@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(Project_Context))]
-    [Migration("20211129192535_init")]
-    partial class init
+    [Migration("20211130115304_init2")]
+    partial class init2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -333,7 +333,7 @@ namespace Data.Migrations
                     b.Property<int>("CurrentSupplierID")
                         .HasColumnType("int");
 
-                    b.Property<int>("CurrentUserID")
+                    b.Property<int?>("CurrentUserID")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -359,16 +359,13 @@ namespace Data.Migrations
                         .HasMaxLength(5)
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserID")
-                        .HasColumnType("int");
-
                     b.HasKey("ID");
 
                     b.HasIndex("CurrentCategoryID");
 
                     b.HasIndex("CurrentSupplierID");
 
-                    b.HasIndex("UserID");
+                    b.HasIndex("CurrentUserID");
 
                     b.ToTable("Product");
                 });
@@ -690,7 +687,7 @@ namespace Data.Migrations
 
                     b.HasOne("Models.User", "User")
                         .WithMany("Products")
-                        .HasForeignKey("UserID");
+                        .HasForeignKey("CurrentUserID");
 
                     b.Navigation("category");
 
