@@ -1,7 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Models;
+
+
+
 using Models.Models;
+
 using Models.Models.User;
 using System;
 using System.Collections.Generic;
@@ -161,7 +165,7 @@ namespace Data
             .WithMany(sa => sa.AdminSuppliers)
             .HasForeignKey(sa => sa.Supplier_ID);
 
-           
+
 
             modelBuilder.Entity<Product>()
             .HasOne<Supplier>(s => s.supplier)
