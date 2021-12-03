@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Models;
-using Models.Models.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,6 +37,9 @@ namespace Data
         public DbSet<AdminUser> AdminUsers { get; set; }
         public DbSet<AdminProduct> AdminProducts { get; set; }
         public DbSet<AdminSupplier> AdminSuppliers { get; set; }
+        public DbSet<ProductOrder> ProductOrders { get; set; }
+
+
 
 
 
@@ -101,7 +103,19 @@ namespace Data
             .WithMany(pf => pf.productFeedbacks)
             .HasForeignKey(pf => pf.Feedback_ID);
 
-          
+            modelBuilder.Entity<ProductOrder>().HasKey(pf => new { pf.Order_ID, pf.Product_ID });
+
+            modelBuilder.Entity<ProductOrder>()
+            .HasOne<Product>(p => p.product)
+            .WithMany(po => po.productOrders)
+            .HasForeignKey(po => po.Product_ID);
+
+            modelBuilder.Entity<ProductOrder>()
+            .HasOne<Order>(o => o.Order)
+            .WithMany(po => po.productOrders)
+            .HasForeignKey(o => o.Order_ID);
+
+
             modelBuilder.Entity<AdminUser>().HasKey(Au => new { Au.User_ID, Au.Admin_ID });
             modelBuilder.Entity<AdminUser>()
             .HasOne<Admin>(a => a.Admin)
@@ -145,10 +159,7 @@ namespace Data
             .WithMany(sa => sa.AdminSuppliers)
             .HasForeignKey(sa => sa.Supplier_ID);
 
-            modelBuilder.Entity<Product>()
-           .HasOne<User>(s => s.User)
-           .WithMany(g => g.Products)
-           .HasForeignKey(s => s.CurrentUserID);
+           
 
             modelBuilder.Entity<Product>()
             .HasOne<Supplier>(s => s.supplier)

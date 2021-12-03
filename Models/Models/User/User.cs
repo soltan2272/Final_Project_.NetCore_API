@@ -18,7 +18,6 @@ namespace Models
         public int SSN { set; get; }
         public string Date_Of_Birth { set; get; }
         public ICollection<Order> Orders { get; set; }
-        public ICollection<Product> Products { get; set; }
         public ICollection<Feedback> Feedbacks { get; set; }
         public IList<AdminUser> AdminUsers { get; set; }
 

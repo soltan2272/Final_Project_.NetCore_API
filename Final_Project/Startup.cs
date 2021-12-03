@@ -85,6 +85,11 @@ namespace Final_Project
 
             app.UseRouting();
             app.UseStaticFiles();
+            app.UseCors(builer => {
+                builer.WithOrigins("https://localhost:44393");
+                builer.AllowAnyMethod();
+                builer.AllowAnyHeader();
+
 
             app.UseAuthentication();
             app.UseAuthorization();

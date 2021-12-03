@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Models.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,7 @@ namespace Models
         public Payment Payment { get; set; }
         public int CurrentUserID { get; set; }
         public User User { get; set; }
+        public IList<ProductOrder> productOrders { get; set; }
 
     }
 }
