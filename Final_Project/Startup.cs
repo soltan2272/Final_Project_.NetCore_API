@@ -86,16 +86,26 @@ namespace Final_Project
             app.UseRouting();
             app.UseStaticFiles();
 
-            app.UseAuthentication();
-            app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
+            app.UseCors(builer =>
             {
-                endpoints.MapControllers();
-            });
+                builer.WithOrigins("https://localhost:44393");
+                builer.AllowAnyMethod();
+                builer.AllowAnyHeader();
 
-            app.UseSwagger();
-            app.UseSwaggerUI();
+
+
+                app.UseAuthentication();
+                app.UseAuthorization();
+
+                app.UseEndpoints(endpoints =>
+                {
+                    endpoints.MapControllers();
+                });
+
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            });
         }
     }
 }

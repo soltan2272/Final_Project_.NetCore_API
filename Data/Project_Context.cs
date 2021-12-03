@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Models;
+
+
+using Models.Models;
+
 using Models.Models.User;
 using System;
 using System.Collections.Generic;
