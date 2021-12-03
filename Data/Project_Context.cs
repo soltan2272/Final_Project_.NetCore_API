@@ -1,6 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Models;
+<<<<<<< HEAD
 using Models.Models;
+=======
+using Models.Models.User;
+>>>>>>> b077052778072ca589dd5ad61889379aac053c57
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Data
 {
-   public class Project_Context:DbContext
+    public class Project_Context : IdentityDbContext<User,Role,int>
     {
 
         public Project_Context(DbContextOptions<Project_Context> options)
@@ -18,7 +23,7 @@ namespace Data
         {
         }
 
-        public DbSet<User> Users { get; set; }
+        
         public DbSet<Supplier> Suplliers { get; set; }
         public DbSet<Store> Stores { get; set; }
         public DbSet<Offer> Offers { get; set; }

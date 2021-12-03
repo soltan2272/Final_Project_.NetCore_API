@@ -20,7 +20,7 @@ namespace Reposotries
         IGenericRepostory<Product> GetProductRepo();
         IGenericRepostory<Store> GetStoreRepo();
         IGenericRepostory<Supplier> GetSupplierRepo();
-        IGenericRepostory<User> GetUserRepo();
+       /*IGenericRepostory<User> GetUserRepo();*/
         Task Save();
 
     }
