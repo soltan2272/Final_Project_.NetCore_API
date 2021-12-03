@@ -11,6 +11,7 @@ namespace Models
     {
         public string Name { get; set; }
         public float Price { get; set; }
+        public int Quantity { set; get; }
         public string Description { get; set; }
         public string Image { get; set; }
         public int Rate { get; set; }
@@ -22,7 +23,6 @@ namespace Models
         public int CurrentCategoryID { get; set; }
         public Category category { get; set; }
         public IList<ProductOrder> productOrders { get; set; }
-
         public IList<AdminProduct> AdminProducts { get; set; }
 
       
