@@ -1,3 +1,4 @@
+﻿using Microsoft.AspNetCore.Cors;
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models;
@@ -28,19 +29,11 @@ namespace Final_Project.Controllers
         }
 
         [HttpGet("")]
-
         public  ResultViewModel Get()
         {
 
             result.Message = "All Products";
-            result.Data = ProductRepo.Get().Select(p=> new ProductViewModel() {
-                ID=p.ID,
-                Name=p.Name,
-                Image=p.Image,
-                Rate=p.Rate,
-                Description=p.Description,
-                Price=p.Price
-            });
+            result.Data = ProductRepo.Get().Select(p => p.ToViewModel());
             return result;
         }
 
@@ -48,19 +41,19 @@ namespace Final_Project.Controllers
         public ResultViewModel GetProductByID(int id)
         {
             result.Message = " Product By ID";
-
-            Product p = ProductRepo.GetByID(id);
-            ProductViewModel productview = new ProductViewModel()
-            {
-                ID = p.ID,
-                Name = p.Name,
-                Image = p.Image,
-                Rate = p.Rate,
-                Description = p.Description,
-                Price = p.Price
-            };
-            result.Data = productview;
+            result.Data = ProductRepo.GetByID(id).ToViewModel();
             
+            return result;
+
+        }
+        [HttpGet("delete/{id}")]
+        public ResultViewModel Delete(int id)
+        {
+            result.Message = " Delete Done";
+            result.Data = ProductRepo.GetByID(id);
+            ProductRepo.Remove(ProductRepo.GetByID(id));
+            UnitOfWork.Save();
+
             return result;
 
         }

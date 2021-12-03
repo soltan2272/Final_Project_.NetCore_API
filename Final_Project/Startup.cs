@@ -85,7 +85,7 @@ namespace Final_Project
 
             app.UseRouting();
             app.UseStaticFiles();
-
+  
 
             app.UseCors(builer =>
             {
