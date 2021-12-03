@@ -1,11 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Models;
-<<<<<<< HEAD
 using Models.Models;
-=======
 using Models.Models.User;
->>>>>>> b077052778072ca589dd5ad61889379aac053c57
 using System;
 using System.Collections.Generic;
 using System.Linq;

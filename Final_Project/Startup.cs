@@ -90,14 +90,11 @@ namespace Final_Project
                 builer.AllowAnyMethod();
                 builer.AllowAnyHeader();
 
-<<<<<<< HEAD
 
            } );
-=======
             app.UseAuthentication();
             app.UseAuthorization();
 
->>>>>>> b077052778072ca589dd5ad61889379aac053c57
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 ﻿using Microsoft.AspNetCore.Cors;
-=======
 ﻿using Microsoft.AspNetCore.Authorization;
->>>>>>> b077052778072ca589dd5ad61889379aac053c57
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using Reposotries;
