@@ -3,11 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Data.Migrations
 {
-<<<<<<< HEAD:Data/Migrations/20211202134907_identity.cs
     public partial class identity : Migration
-=======
-    public partial class init : Migration
->>>>>>> caf77db4dcb7bff2c7f84d0c20bd99574fb97a0c:Data/Migrations/20211203042620_init.cs
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -212,42 +208,7 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-<<<<<<< HEAD:Data/Migrations/20211202134907_identity.cs
                 name: "AspNetUserLogins",
-=======
-                name: "Product",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
-                    Price = table.Column<float>(type: "real", maxLength: 20, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
-                    Image = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    Rate = table.Column<int>(type: "int", maxLength: 5, nullable: false),
-                    CurrentSupplierID = table.Column<int>(type: "int", nullable: false),
-                    CurrentCategoryID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Product", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Product_Category_CurrentCategoryID",
-                        column: x => x.CurrentCategoryID,
-                        principalTable: "Category",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Product_Supplier_CurrentSupplierID",
-                        column: x => x.CurrentSupplierID,
-                        principalTable: "Supplier",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SupplierStores",
->>>>>>> caf77db4dcb7bff2c7f84d0c20bd99574fb97a0c:Data/Migrations/20211203042620_init.cs
                 columns: table => new
                 {
                     LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -391,7 +352,6 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-<<<<<<< HEAD:Data/Migrations/20211202134907_identity.cs
                 name: "Product",
                 columns: table => new
                 {
@@ -454,8 +414,6 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-=======
->>>>>>> caf77db4dcb7bff2c7f84d0c20bd99574fb97a0c:Data/Migrations/20211203042620_init.cs
                 name: "AdminStore",
                 columns: table => new
                 {
@@ -552,6 +510,30 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ProductFeedbacks",
+                columns: table => new
+                {
+                    Product_ID = table.Column<int>(type: "int", nullable: false),
+                    Feedback_ID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductFeedbacks", x => new { x.Feedback_ID, x.Product_ID });
+                    table.ForeignKey(
+                        name: "FK_ProductFeedbacks_Feedback_Feedback_ID",
+                        column: x => x.Feedback_ID,
+                        principalTable: "Feedback",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProductFeedbacks_Product_Product_ID",
+                        column: x => x.Product_ID,
+                        principalTable: "Product",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "productOffers",
                 columns: table => new
                 {
@@ -595,54 +577,6 @@ namespace Data.Migrations
                         name: "FK_storeProducts_Store_Store_ID",
                         column: x => x.Store_ID,
                         principalTable: "Store",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ProductFeedbacks",
-                columns: table => new
-                {
-                    Product_ID = table.Column<int>(type: "int", nullable: false),
-                    Feedback_ID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProductFeedbacks", x => new { x.Feedback_ID, x.Product_ID });
-                    table.ForeignKey(
-                        name: "FK_ProductFeedbacks_Feedback_Feedback_ID",
-                        column: x => x.Feedback_ID,
-                        principalTable: "Feedback",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ProductFeedbacks_Product_Product_ID",
-                        column: x => x.Product_ID,
-                        principalTable: "Product",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ProductOrders",
-                columns: table => new
-                {
-                    Product_ID = table.Column<int>(type: "int", nullable: false),
-                    Order_ID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProductOrders", x => new { x.Order_ID, x.Product_ID });
-                    table.ForeignKey(
-                        name: "FK_ProductOrders_Order_Order_ID",
-                        column: x => x.Order_ID,
-                        principalTable: "Order",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ProductOrders_Product_Product_ID",
-                        column: x => x.Product_ID,
-                        principalTable: "Product",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -742,6 +676,11 @@ namespace Data.Migrations
                 column: "CurrentSupplierID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Product_CurrentUserID",
+                table: "Product",
+                column: "CurrentUserID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ProductFeedbacks_Product_ID",
                 table: "ProductFeedbacks",
                 column: "Product_ID");
@@ -749,11 +688,6 @@ namespace Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_productOffers_Product_ID",
                 table: "productOffers",
-                column: "Product_ID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProductOrders_Product_ID",
-                table: "ProductOrders",
                 column: "Product_ID");
 
             migrationBuilder.CreateIndex(
@@ -782,7 +716,6 @@ namespace Data.Migrations
                 name: "AdminUsers");
 
             migrationBuilder.DropTable(
-<<<<<<< HEAD:Data/Migrations/20211202134907_identity.cs
                 name: "AspNetRoleClaims");
 
             migrationBuilder.DropTable(
@@ -801,15 +734,10 @@ namespace Data.Migrations
                 name: "Order");
 
             migrationBuilder.DropTable(
-=======
->>>>>>> caf77db4dcb7bff2c7f84d0c20bd99574fb97a0c:Data/Migrations/20211203042620_init.cs
                 name: "ProductFeedbacks");
 
             migrationBuilder.DropTable(
                 name: "productOffers");
-
-            migrationBuilder.DropTable(
-                name: "ProductOrders");
 
             migrationBuilder.DropTable(
                 name: "storeProducts");
@@ -821,7 +749,6 @@ namespace Data.Migrations
                 name: "Admin");
 
             migrationBuilder.DropTable(
-<<<<<<< HEAD:Data/Migrations/20211202134907_identity.cs
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
@@ -831,15 +758,10 @@ namespace Data.Migrations
                 name: "Payment");
 
             migrationBuilder.DropTable(
-=======
->>>>>>> caf77db4dcb7bff2c7f84d0c20bd99574fb97a0c:Data/Migrations/20211203042620_init.cs
                 name: "Feedback");
 
             migrationBuilder.DropTable(
                 name: "Offer");
-
-            migrationBuilder.DropTable(
-                name: "Order");
 
             migrationBuilder.DropTable(
                 name: "Product");
@@ -851,27 +773,12 @@ namespace Data.Migrations
                 name: "Contact");
 
             migrationBuilder.DropTable(
-<<<<<<< HEAD:Data/Migrations/20211202134907_identity.cs
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Category");
 
             migrationBuilder.DropTable(
-=======
-                name: "Courier");
-
-            migrationBuilder.DropTable(
-                name: "Payment");
-
-            migrationBuilder.DropTable(
-                name: "User");
-
-            migrationBuilder.DropTable(
-                name: "Category");
-
-            migrationBuilder.DropTable(
->>>>>>> caf77db4dcb7bff2c7f84d0c20bd99574fb97a0c:Data/Migrations/20211203042620_init.cs
                 name: "Supplier");
         }
     }
