@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(Project_Context))]
-    [Migration("20211130115304_init2")]
-    partial class init2
+    [Migration("20211203042620_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -219,6 +219,21 @@ namespace Data.Migrations
                     b.ToTable("Feedback");
                 });
 
+            modelBuilder.Entity("Models.Models.ProductOrder", b =>
+                {
+                    b.Property<int>("Order_ID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Product_ID")
+                        .HasColumnType("int");
+
+                    b.HasKey("Order_ID", "Product_ID");
+
+                    b.HasIndex("Product_ID");
+
+                    b.ToTable("ProductOrders");
+                });
+
             modelBuilder.Entity("Models.Offer", b =>
                 {
                     b.Property<int>("ID")
@@ -333,9 +348,6 @@ namespace Data.Migrations
                     b.Property<int>("CurrentSupplierID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CurrentUserID")
-                        .HasColumnType("int");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(1000)
@@ -364,8 +376,6 @@ namespace Data.Migrations
                     b.HasIndex("CurrentCategoryID");
 
                     b.HasIndex("CurrentSupplierID");
-
-                    b.HasIndex("CurrentUserID");
 
                     b.ToTable("Product");
                 });
@@ -644,6 +654,25 @@ namespace Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Models.Models.ProductOrder", b =>
+                {
+                    b.HasOne("Models.Order", "Order")
+                        .WithMany("productOrders")
+                        .HasForeignKey("Order_ID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Models.Product", "product")
+                        .WithMany("productOrders")
+                        .HasForeignKey("Product_ID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("product");
+                });
+
             modelBuilder.Entity("Models.Order", b =>
                 {
                     b.HasOne("Models.Courier", "Courier")
@@ -685,15 +714,9 @@ namespace Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Models.User", "User")
-                        .WithMany("Products")
-                        .HasForeignKey("CurrentUserID");
-
                     b.Navigation("category");
 
                     b.Navigation("supplier");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Models.ProductFeedback", b =>
@@ -808,6 +831,11 @@ namespace Data.Migrations
                     b.Navigation("ProductOffers");
                 });
 
+            modelBuilder.Entity("Models.Order", b =>
+                {
+                    b.Navigation("productOrders");
+                });
+
             modelBuilder.Entity("Models.Payment", b =>
                 {
                     b.Navigation("Orders");
@@ -820,6 +848,8 @@ namespace Data.Migrations
                     b.Navigation("productFeedbacks");
 
                     b.Navigation("ProductOffers");
+
+                    b.Navigation("productOrders");
 
                     b.Navigation("StoresProducts");
                 });
@@ -849,8 +879,6 @@ namespace Data.Migrations
                     b.Navigation("Feedbacks");
 
                     b.Navigation("Orders");
-
-                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }
