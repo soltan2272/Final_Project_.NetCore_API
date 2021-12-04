@@ -13,16 +13,16 @@ namespace Models
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.ToTable("User");
-            builder.HasKey(i => i.ID);
-            builder.Property(i => i.ID).ValueGeneratedOnAdd();
+           // builder.HasKey(i => i.ID);
+          //  builder.Property(i => i.ID).ValueGeneratedOnAdd();
             builder.Property(i => i.Adrress).IsRequired()
                 .HasMaxLength(500);
             builder.Property(i => i.Full_Name).IsRequired()
                 .HasMaxLength(150);
             builder.Property(i => i.Email).IsRequired()
                .HasMaxLength(300);
-            builder.Property(i => i.Password).IsRequired()
-              .HasMaxLength(300);
+        /*    builder.Property(i => i.Password).IsRequired()
+              .HasMaxLength(300);*/
             builder.Property(i => i.SSN).IsRequired()
                .HasMaxLength(14);
             builder.Property(i => i.Date_Of_Birth).IsRequired()

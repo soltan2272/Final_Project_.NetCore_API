@@ -22,14 +22,14 @@ namespace Reposotries
         IGenericRepostory<Product> ProductRepo;
         IGenericRepostory<Store> StoreRepo;
         IGenericRepostory<Supplier> SupplierRepo;
-        IGenericRepostory<User> UserRepo;
+       // IGenericRepostory<User> UserRepo;
         public UnitOfWork(Project_Context context, IGenericRepostory<Admin> adminRepo,
                             IGenericRepostory<Category> categoryRepo, IGenericRepostory<Contact> contactRepo,
                             IGenericRepostory<Courier> courierRepo, IGenericRepostory<Feedback> feedbackRepo,
                             IGenericRepostory<Offer> offerRepo, IGenericRepostory<Order> orderRepo,
                             IGenericRepostory<Payment> paymentRepo, IGenericRepostory<Product> productRepo,
-                            IGenericRepostory<Store> storeRepo, IGenericRepostory<Supplier> supplierRepo,
-                            IGenericRepostory<User> userRepo)
+                            IGenericRepostory<Store> storeRepo, IGenericRepostory<Supplier> supplierRepo)
+                           // IGenericRepostory<User> userRepo)
         {
 
 
@@ -45,7 +45,7 @@ namespace Reposotries
             ProductRepo = productRepo;
             StoreRepo = storeRepo;
             SupplierRepo = supplierRepo;
-            UserRepo = userRepo;
+           // UserRepo = userRepo;
         }
 
         public IGenericRepostory<Admin> GetAdminRepo()
@@ -103,11 +103,11 @@ namespace Reposotries
             return SupplierRepo;
 
         }
-        public IGenericRepostory<User> GetUserRepo()
+     /*   public IGenericRepostory<User> GetUserRepo()
         {
             return UserRepo;
 
-        }
+        }*/
 
         public async Task Save()
         {
