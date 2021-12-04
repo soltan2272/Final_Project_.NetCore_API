@@ -39,9 +39,9 @@ namespace Reposotries
             Table.Update(entity);
         }
 
-        public void Remove(T entity)
+        public void Remove(int id)
         {
-            Table.Remove(entity);
+            Table.Remove(GetByID(id));
         }
 
        
