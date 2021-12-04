@@ -48,17 +48,8 @@ namespace Final_Project.Controllers
         public ResultViewModel GetProductByID(int id)
         {
             result.Message = " Product By ID";
-            Product p = ProductRepo.GetByID(id);
-            ProductViewModel productview = new ProductViewModel()
-            {
-                ID = p.ID,
-                Name = p.Name,
-                Image = p.Image,
-                Rate = p.Rate,
-                Description = p.Description,
-                Price = p.Price
-            };
-            result.Data = productview;
+           
+            result.Data = ProductRepo.GetByID(id).ToViewModel();
 
             return result;
 
@@ -106,6 +97,7 @@ namespace Final_Project.Controllers
             product.CurrentCategoryID = pro.CurrentCategoryID;
             product.CurrentSupplierID = pro.CurrentSupplierID;
 
+
             if (product == null)
             {
                 result.Message = "NotFound Product";
@@ -145,7 +137,6 @@ namespace Final_Project.Controllers
         [HttpPut("editStore")]
         public ResultViewModel editStore(int id, StoreViewModel sto)
         {
-           
             var store = StoreRepo.GetByID(id);
             result.Data = ProductRepo.GetByID(id).ToViewModel();
             
