@@ -16,7 +16,7 @@ namespace ViewModels
     }
     public static class ProductViewModelExtensions
     {
-        public static StoreViewModel ToViewModel(this Store store)
+        public static StoreViewModel ToStoreViewModel(this Store store)
         {
             return new StoreViewModel()
             {

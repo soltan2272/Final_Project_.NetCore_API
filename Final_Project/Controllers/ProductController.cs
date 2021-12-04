@@ -66,7 +66,6 @@ namespace Final_Project.Controllers
                 Price = pro.Price,
                 CurrentCategoryID = pro.CurrentCategoryID,
                 CurrentSupplierID = pro.CurrentSupplierID,
-                CurrentUserID = pro.CurrentUserID
             };
 
             ProductRepo.Add(product);
@@ -79,10 +78,10 @@ namespace Final_Project.Controllers
         [HttpPut("editProduct")]
         public ResultViewModel editProduct(int id , InsertProductViewModel pro)
         {
-            if (id == null)
-            {
-                result.Message = "Not Found Product";
-            }
+            //if (id == null)
+            //{
+            //    result.Message = "Not Found Product";
+            //}
             var product = ProductRepo.GetByID(id);
             product.ID = pro.ID;
             product.Name = pro.Name;
@@ -92,7 +91,7 @@ namespace Final_Project.Controllers
             product.Price = pro.Price;
             product.CurrentCategoryID = pro.CurrentCategoryID;
             product.CurrentSupplierID = pro.CurrentSupplierID;
-            product.CurrentUserID = pro.CurrentUserID;
+           
 
             if (product == null)
             {
@@ -146,10 +145,10 @@ namespace Final_Project.Controllers
         [HttpPut("editStore")]
         public ResultViewModel editStore(int id, StoreViewModel sto)
         {
-            if (id == null)
-            {
-                result.Message = "Not Found Store";
-            }
+            //if (id == null)
+            //{
+            //    result.Message = "Not Found Store";
+            //}
             var store = StoreRepo.GetByID(id);
             result.Data = ProductRepo.GetByID(id).ToViewModel();
             
