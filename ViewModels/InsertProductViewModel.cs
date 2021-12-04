@@ -17,7 +17,6 @@ namespace ViewModels
         public int Rate { get; set; }
         public int CurrentSupplierID { get; set; }
         public int CurrentCategoryID { get; set; }
-        public int? CurrentUserID { get; set; }
 
     }
     public static class InsertProductViewModelExtensions
@@ -34,7 +33,6 @@ namespace ViewModels
                 Description = product.Description,
                 CurrentSupplierID = product.CurrentSupplierID,
                 CurrentCategoryID = product.CurrentCategoryID,
-                CurrentUserID = product.CurrentUserID
             };
         }
 

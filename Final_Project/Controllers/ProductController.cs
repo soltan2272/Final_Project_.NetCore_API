@@ -21,6 +21,8 @@ namespace Final_Project.Controllers
         IGenericRepostory<Store> StoreRepo;
         IUnitOfWork UnitOfWork;
 
+        IGenericRepostory<Offer> OfferRepo;
+
         ResultViewModel result = new ResultViewModel();
 
         public ProductController(IUnitOfWork unitOfWork)
@@ -28,6 +30,7 @@ namespace Final_Project.Controllers
             UnitOfWork = unitOfWork;
             ProductRepo = UnitOfWork.GetProductRepo();
             StoreRepo = UnitOfWork.GetStoreRepo();
+            OfferRepo = UnitOfWork.GetOfferRepo();
         }
 
         [HttpGet("")]
@@ -60,6 +63,7 @@ namespace Final_Project.Controllers
             return result;
 
         }
+
         [HttpPost("addProduct")]
         public ResultViewModel addProduct(InsertProductViewModel pro)
         {
@@ -75,7 +79,6 @@ namespace Final_Project.Controllers
                 Price = pro.Price,
                 CurrentCategoryID = pro.CurrentCategoryID,
                 CurrentSupplierID = pro.CurrentSupplierID,
-                CurrentUserID = pro.CurrentUserID
             };
 
             ProductRepo.Add(product);
@@ -85,13 +88,14 @@ namespace Final_Project.Controllers
             return result;
 
         }
+
         [HttpPut("editProduct")]
         public ResultViewModel editProduct(int id , InsertProductViewModel pro)
         {
-            if (id == null)
-            {
-                result.Message = "Not Found Product";
-            }
+            //if (id == null)
+            //{
+            //    result.Message = "Not Found Product";
+            //}
             var product = ProductRepo.GetByID(id);
             product.ID = pro.ID;
             product.Name = pro.Name;
@@ -101,7 +105,6 @@ namespace Final_Project.Controllers
             product.Price = pro.Price;
             product.CurrentCategoryID = pro.CurrentCategoryID;
             product.CurrentSupplierID = pro.CurrentSupplierID;
-            product.CurrentUserID = pro.CurrentUserID;
 
             if (product == null)
             {
@@ -114,24 +117,11 @@ namespace Final_Project.Controllers
         public ResultViewModel deleteProduct(int id)
         {
             result.Message = "Deleted Product";
-            var product = ProductRepo.GetByID(id);
-            result.Data = product;
-            ProductRepo.Remove(product);
+            result.Data = ProductRepo.GetByID(id);
+            ProductRepo.Remove(id);
             UnitOfWork.Save();
             return result;
         }
-
-
-
-
-
-
-
-
-
-
-
-
 
         [HttpPost("addStore")]
         public ResultViewModel addStore(StoreViewModel sto)
@@ -155,10 +145,7 @@ namespace Final_Project.Controllers
         [HttpPut("editStore")]
         public ResultViewModel editStore(int id, StoreViewModel sto)
         {
-            if (id == null)
-            {
-                result.Message = "Not Found Store";
-            }
+           
             var store = StoreRepo.GetByID(id);
             result.Data = ProductRepo.GetByID(id).ToViewModel();
             
@@ -179,23 +166,51 @@ namespace Final_Project.Controllers
         [HttpDelete("deleteStore")]
         public ResultViewModel deleteStore(int id)
         {
-            var store = StoreRepo.GetByID(id);
-            result.Data = store;
-            StoreRepo.Remove(store);
+            result.Data = StoreRepo.GetByID(id);
+            StoreRepo.Remove(id);
             UnitOfWork.Save();
             result.Message = "Store Deleted";
             return result;
         }
-        [HttpGet("delete/{id}")]
-        public ResultViewModel Delete(int id)
+
+
+
+        
+        [HttpPost("offer")]
+        public ResultViewModel addOffer(Offer offer)
         {
-            result.Message = " Delete Done";
-            result.Data = ProductRepo.GetByID(id);
-            ProductRepo.Remove(ProductRepo.GetByID(id));
+            result.Message = "Add Offer To Product";
+
+            OfferRepo.Add(offer);
+            UnitOfWork.Save();
+            result.Data = offer;
+
+            return result;
+
+        }
+
+        [HttpDelete("deleteoffer")]
+        public ResultViewModel DeleteOffer(int id)
+        {
+            result.Message = " offer Deleted";
+            result.Data = OfferRepo.GetByID(id);
+            OfferRepo.Remove(id);
             UnitOfWork.Save();
 
             return result;
 
         }
+
+        [HttpPut("editoffer")]
+        public ResultViewModel editOffer(Offer offer)
+        {
+
+            result.Message = "edit offer";
+            result.Data = offer;
+            OfferRepo.Update(offer);
+            UnitOfWork.Save();
+            return result;
+        }
+
     }
 }
