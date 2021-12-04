@@ -21,7 +21,7 @@ namespace ViewModels
     }
     public static class InsertProductViewModelExtensions
     {
-        public static InsertProductViewModel ToViewModel(this Product product)
+        public static InsertProductViewModel ToInsertViewModel(this Product product)
         {
             return new InsertProductViewModel()
             {
