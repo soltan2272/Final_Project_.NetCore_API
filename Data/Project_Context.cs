@@ -105,7 +105,18 @@ namespace Data
             .WithMany(pf => pf.productFeedbacks)
             .HasForeignKey(pf => pf.Feedback_ID);
 
-          
+            modelBuilder.Entity<ProductOrder>().HasKey(pf => new { pf.Order_ID, pf.Product_ID });
+            modelBuilder.Entity<ProductOrder>()
+            .HasOne<Product>(p => p.product)
+            .WithMany(pf => pf.productOrders)
+            .HasForeignKey(pf => pf.Product_ID);
+
+            modelBuilder.Entity<ProductOrder>()
+            .HasOne<Order>(f => f.Order)
+            .WithMany(pf => pf.productOrders)
+            .HasForeignKey(pf => pf.Order_ID);
+
+
             modelBuilder.Entity<AdminUser>().HasKey(Au => new { Au.User_ID, Au.Admin_ID });
             modelBuilder.Entity<AdminUser>()
             .HasOne<Admin>(a => a.Admin)
@@ -149,10 +160,10 @@ namespace Data
             .WithMany(sa => sa.AdminSuppliers)
             .HasForeignKey(sa => sa.Supplier_ID);
 
-            modelBuilder.Entity<Product>()
+          /*  modelBuilder.Entity<Product>()
            .HasOne<User>(s => s.User)
            .WithMany(g => g.Products)
-           .HasForeignKey(s => s.CurrentUserID);
+           .HasForeignKey(s => s.CurrentUserID);*/
 
             modelBuilder.Entity<Product>()
             .HasOne<Supplier>(s => s.supplier)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Models.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,8 +10,10 @@ namespace Reposotries
 {
     public interface IUserRepository
     {
-        Task<string> SignUp(SignUpModel signUpModel);
+        Task<AuthModel> SignUp(SignUpModel signUpModel);
 
-        Task<string> Login(LoginModel loginModel);
+        Task<AuthModel> Login(LoginModel loginModel);
+
+        Task<string> AddRole(AddRoleModel Model);
     }
 }

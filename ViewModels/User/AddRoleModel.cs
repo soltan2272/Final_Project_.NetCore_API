@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 
 namespace ViewModels
 {
-   public class LoginModel
+    public class AddRoleModel
     {
         [Required]
-        public string Email { set; get; }
-
+        public int UserID { set; get; }
         [Required]
-        public string Password { set; get; }
+        public string Role { set; get; }
     }
 }

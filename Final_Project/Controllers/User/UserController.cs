@@ -25,23 +25,45 @@ namespace Final_Project.Controllers.User
 
 
         [HttpPost("signup")]
-        public async Task<IActionResult> SignUp(SignUpModel signupModel)
+        public async Task<IActionResult> SignUp([FromBody]SignUpModel signupModel)
         {
-            string Token = await UserRepository.SignUp(signupModel);
-            if (string.IsNullOrEmpty(Token))
-                return Unauthorized();
-            return Ok(Token);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await UserRepository.SignUp(signupModel);
+            if(!result.IsAuthenticated)
+                return BadRequest(result.Message);
+          
+
+
+            return Ok(result);
 
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginModel loginModel)
+        public async Task<IActionResult> login([FromBody] LoginModel loginModel)
         {
-            string Token = await UserRepository.Login(loginModel);
-            if (string.IsNullOrEmpty(Token))
-                return Unauthorized();
-            return Ok(Token);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
+            var result = await UserRepository.Login(loginModel);
+            if (!result.IsAuthenticated)
+                return BadRequest(result.Message);
+            return Ok(result);
+        }
+
+        [HttpPost("addrole")]
+        public async Task<IActionResult> AddRole([FromBody] AddRoleModel model)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await UserRepository.AddRole(model);
+
+            if (!string.IsNullOrEmpty(result))
+                return BadRequest(result);
+
+            return Ok(model);
         }
     }
 }

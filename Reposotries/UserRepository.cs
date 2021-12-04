@@ -2,6 +2,8 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Models;
+using Models.Models;
+using Models.Models.User;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -15,40 +17,66 @@ namespace Reposotries
 {
     public class UserRepository : IUserRepository
     {
-        UserManager<User> UserManager;
-       // RoleManager<User> RoleManager;
+       UserManager<User> UserManager;
+       RoleManager<Role> roleManager;
         public IConfiguration Configuration { get; }
         public UserRepository(UserManager<User> userManager,
-            IConfiguration configuration)
+            IConfiguration configuration, RoleManager<Role> _roleManager)
         {
             UserManager = userManager;
             Configuration = configuration;
+            roleManager = _roleManager;
         }
 
 
-        public async Task<string> SignUp(SignUpModel signUpModel)
+        public async Task<AuthModel> SignUp(SignUpModel signUpModel)
         {
+
+            if (await UserManager.FindByEmailAsync(signUpModel.Email) is not null)
+                return new AuthModel { Message = "Email is already registered" };
+
+
+            if (await UserManager.FindByNameAsync(signUpModel.Full_Name) is not null)
+                return new AuthModel { Message = "UserName is already registered Please Select another one" };
+
             User Temp = signUpModel.ToModel();
             var result = await UserManager.CreateAsync(Temp, signUpModel.Password);
             if (!result.Succeeded)
-                return null;
+            {
+                string errors = string.Empty;
+                foreach (var err in result.Errors)
+                {
+                    errors += $"{err.Description} , ";
+                }
+                return new AuthModel
+                {
+                    Message = errors
+                };
+            }
 
-          /*  var userRoles = await UserManager.GetRolesAsync(Temp);*/
+            await UserManager.AddToRoleAsync(Temp, "User");
 
+
+            var userClaims = await UserManager.GetClaimsAsync(Temp);
+            var roles = await UserManager.GetRolesAsync(Temp);
+            var roleClaims = new List<Claim>();
+
+            foreach (var role in roles)
+                roleClaims.Add(new Claim("roles", role));
 
             var SigninKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Secret"]));
 
-            var UserClaims = new List<Claim>()
+            var Claims = new List<Claim>()
             {
+
                 new Claim(ClaimTypes.Name,signUpModel.Full_Name),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(ClaimTypes.Email,signUpModel.Email),
+                new Claim("uid",$"{Temp.Id}")
+            }
+            .Union(userClaims)
+            .Union(roleClaims);
 
-            };
-
-         /*   foreach (var userRole in userRoles)
-            {
-                UserClaims.Add(new Claim(ClaimTypes.Role, userRole));
-            }*/
 
 
             var Token = new JwtSecurityToken
@@ -57,49 +85,85 @@ namespace Reposotries
                     audience: Configuration["JWT:ValidAudience"],
                     expires: DateTime.Now.AddDays(14),
                     signingCredentials: new SigningCredentials(SigninKey, SecurityAlgorithms.HmacSha256Signature),
-                    claims: UserClaims
+                    claims: Claims
                 );
 
+             
+            return new AuthModel
+            {
+                Email = Temp.Email,
+                ExpiresOn = Token.ValidTo,
+                IsAuthenticated = true,
+                Roles = new List<string> { "User" },
+                Token = new JwtSecurityTokenHandler().WriteToken(Token),
+                Username = Temp.UserName
+            };
+        }
+     public async Task<AuthModel> Login(LoginModel model)
+        {
+            var authModel = new AuthModel();
 
-         /*   if (!await RoleManager.RoleExistsAsync(UserRoles.Seller))
-                await RoleManager.CreateAsync(new IdentityRole(UserRoles.Seller));
-            if (!await RoleManager.RoleExistsAsync(UserRoles.User))
-                await RoleManager.CreateAsync(new IdentityRole(UserRoles.User));*/
+            var user = await UserManager.FindByEmailAsync(model.Email);
+            if (user is null || !(await UserManager.CheckPasswordAsync(user, model.Password)))
+            {
+                authModel.Message = "Email or password is inncorrect";
+                return authModel;
+            }
 
-            return new JwtSecurityTokenHandler().WriteToken(Token);
+            var userClaims = await UserManager.GetClaimsAsync(user);
+            var roles = await UserManager.GetRolesAsync(user);
+            var roleClaims = new List<Claim>();
+
+            foreach (var role in roles)
+                roleClaims.Add(new Claim("roles", role));
+
+            var SigninKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Secret"]));
+
+            var Claims = new List<Claim>()
+            {
+                new Claim(ClaimTypes.Email,user.Email),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim("uid",$"{user.Id}")
+            }
+            .Union(userClaims)
+            .Union(roleClaims);
+
+
+
+            var Token = new JwtSecurityToken
+                (
+                    issuer: Configuration["JWT:ValidIssuer"],
+                    audience: Configuration["JWT:ValidAudience"],
+                    expires: DateTime.Now.AddDays(14),
+                    signingCredentials: new SigningCredentials(SigninKey, SecurityAlgorithms.HmacSha256Signature),
+                    claims: Claims
+                );
+            authModel.IsAuthenticated = true;
+            authModel.Token = new JwtSecurityTokenHandler().WriteToken(Token);
+            authModel.Email = user.Email;
+            authModel.Username = user.UserName;
+            authModel.ExpiresOn = Token.ValidTo;
+            authModel.Roles = roles.ToList();
+
+            return authModel;
 
         }
-        public async Task<string> Login(LoginModel model)
+
+        public async Task<string> AddRole(AddRoleModel Model)
         {
-            var user = await UserManager.FindByEmailAsync(model.Email);
-            if (user != null && await UserManager.CheckPasswordAsync(user, model.Password))
-            {
-                var userRoles = await UserManager.GetRolesAsync(user);
+            var user = await UserManager.FindByIdAsync(Model.UserID.ToString());
 
-                var authClaims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Name, user.UserName),
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                };
+            if (user is null || !await roleManager.RoleExistsAsync(Model.Role))
+                return "Invalid user ID or Role";
 
-                foreach (var userRole in userRoles)
-                {
-                    authClaims.Add(new Claim(ClaimTypes.Role, userRole));
-                }
+            if (await UserManager.IsInRoleAsync(user,Model.Role))
+                return "User already assigned to this role";
 
-                var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Secret"]));
+            var result = await UserManager.AddToRoleAsync(user,Model.Role);
 
-                var token = new JwtSecurityToken(
-                   issuer: Configuration["JWT:ValidIssuer"],
-                    audience: Configuration["JWT:ValidAudience"],
-                    expires: DateTime.Now.AddHours(3),
-                    claims: authClaims,
-                   signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256Signature)
-                    );
-
-                return new JwtSecurityTokenHandler().WriteToken(token);
-            }
-            return null;
+            return result.Succeeded ? string.Empty : "Sonething went wrong";
         }
     }
+
+   
 }

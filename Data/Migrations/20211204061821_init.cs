@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Data.Migrations
 {
-    public partial class identity : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -363,18 +363,11 @@ namespace Data.Migrations
                     Image = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     Rate = table.Column<int>(type: "int", maxLength: 5, nullable: false),
                     CurrentSupplierID = table.Column<int>(type: "int", nullable: false),
-                    CurrentCategoryID = table.Column<int>(type: "int", nullable: false),
-                    CurrentUserID = table.Column<int>(type: "int", nullable: true)
+                    CurrentCategoryID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Product", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Product_AspNetUsers_CurrentUserID",
-                        column: x => x.CurrentUserID,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Product_Category_CurrentCategoryID",
                         column: x => x.CurrentCategoryID,
@@ -558,6 +551,30 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ProductOrder",
+                columns: table => new
+                {
+                    Product_ID = table.Column<int>(type: "int", nullable: false),
+                    Order_ID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductOrder", x => new { x.Order_ID, x.Product_ID });
+                    table.ForeignKey(
+                        name: "FK_ProductOrder_Order_Order_ID",
+                        column: x => x.Order_ID,
+                        principalTable: "Order",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProductOrder_Product_Product_ID",
+                        column: x => x.Product_ID,
+                        principalTable: "Product",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "storeProducts",
                 columns: table => new
                 {
@@ -676,11 +693,6 @@ namespace Data.Migrations
                 column: "CurrentSupplierID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Product_CurrentUserID",
-                table: "Product",
-                column: "CurrentUserID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ProductFeedbacks_Product_ID",
                 table: "ProductFeedbacks",
                 column: "Product_ID");
@@ -688,6 +700,11 @@ namespace Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_productOffers_Product_ID",
                 table: "productOffers",
+                column: "Product_ID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductOrder_Product_ID",
+                table: "ProductOrder",
                 column: "Product_ID");
 
             migrationBuilder.CreateIndex(
@@ -731,13 +748,13 @@ namespace Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Order");
-
-            migrationBuilder.DropTable(
                 name: "ProductFeedbacks");
 
             migrationBuilder.DropTable(
                 name: "productOffers");
+
+            migrationBuilder.DropTable(
+                name: "ProductOrder");
 
             migrationBuilder.DropTable(
                 name: "storeProducts");
@@ -752,16 +769,13 @@ namespace Data.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Courier");
-
-            migrationBuilder.DropTable(
-                name: "Payment");
-
-            migrationBuilder.DropTable(
                 name: "Feedback");
 
             migrationBuilder.DropTable(
                 name: "Offer");
+
+            migrationBuilder.DropTable(
+                name: "Order");
 
             migrationBuilder.DropTable(
                 name: "Product");
@@ -774,6 +788,12 @@ namespace Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Courier");
+
+            migrationBuilder.DropTable(
+                name: "Payment");
 
             migrationBuilder.DropTable(
                 name: "Category");
