@@ -45,17 +45,8 @@ namespace Final_Project.Controllers
         public ResultViewModel GetProductByID(int id)
         {
             result.Message = " Product By ID";
-            Product p = ProductRepo.GetByID(id);
-            ProductViewModel productview = new ProductViewModel()
-            {
-                ID = p.ID,
-                Name = p.Name,
-                Image = p.Image,
-                Rate = p.Rate,
-                Description = p.Description,
-                Price = p.Price
-            };
-            result.Data = productview;
+           
+            result.Data = ProductRepo.GetByID(id).ToViewModel();
 
             return result;
 

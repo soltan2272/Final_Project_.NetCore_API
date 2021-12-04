@@ -9,13 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{A89F9289-C669-4085-A3FD-AB464C277CEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reposotries", "Reposotries\Reposotries.csproj", "{6E1C5BCA-D5F2-4418-9924-DCDB40FE2BA3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reposotries", "Reposotries\Reposotries.csproj", "{6E1C5BCA-D5F2-4418-9924-DCDB40FE2BA3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewModels", "ViewModels\ViewModels.csproj", "{BDC4CF76-6566-4930-8547-55A3A2DDFFBA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminDashboard", "AdminDashboard\AdminDashboard.csproj", "{B67B6D4A-53E7-4328-8BAD-12A72A176CD2}"
-
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModels", "ViewModels\ViewModels.csproj", "{BDC4CF76-6566-4930-8547-55A3A2DDFFBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdminDashboard", "AdminDashboard\AdminDashboard.csproj", "{B67B6D4A-53E7-4328-8BAD-12A72A176CD2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
